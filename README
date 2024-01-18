@@ -1,0 +1,27 @@
+#
+REVIEWER outputs;
+- images file
+- image.metrics.tsv
+#
+EH Calls
+
+
+(1) First command is to get necessary info field from the input image file {locus}.svg using the script "get_reviewer_image_sections_new.py".
+The command below will generate the two output files (file names provided as input in command):
+{locus}_output1 has metrices necessary for ML method.
+ {locus}_output2 is instead not ivolved in ML method, it rather serves information about the image coordinate (where the first read of upper haplotype  starts, where the read of bottom haplotype  starts, where the repeat region in the upper haplotype starts, where the repeat region in the bottom haplotype starts)
+python3 get_reviewer_image_sections_new.py {locus}.svg {locus}_output1 {locus}_output2
+(2) Get the total counts of nucleotide interruptions within the reads aligned to a reference sequence in the image.
+The input files are the image file {sample}.svg and {sample}_output2 (the file generated from previous step)
+bash count_nucleotides_from_reads_Total_v3.sh {locus}.svg {locus}_output2 > {locus}_TotalCounts
+bash count_nucleotides_from_reads_ORANGE_v3.sh {locus}.svg {locus}_output2 > {locus}_orangeCounts
+count_nucleotides_from_reads_Total_v3.sh  : this gets the total counts of interrupting nucleotides in entire size of aligned read shown in the image
+count_nucleotides_from_reads_ORANGE_v3.sh  : this gets the total counts of interrupting nucleotides in REPEAT region (orange)of aligned read shown in the image
+(3) Combining everything into a file named {locus}_AllMetrices
+python3 combine_files.py {locus}.metrics.tsv {locus}_output1 {locus}_TotalCounts {locus}_orangeCounts {locus}_AllMetrices
+Here one of the the input file  {locus}.metrics.tsv is generated from REViewer tool.
+--------------
+(4) Final step is to combine all {locus}_AllMetrices  files of each loci of a given sample into a single txt file. I do it manually by command line below.
+use the python script which will eliminate files with NA values automatically and collect the failed images into a 
+separate metrics file
+python combine_files_final.py SampleID
