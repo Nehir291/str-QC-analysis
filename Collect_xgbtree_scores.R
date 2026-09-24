@@ -82,7 +82,7 @@ merged_data_red <- merged_data %>% select(VariantId,CI.size..Allele.1,CI.size..A
 
 #Method 1: full set of Pacbio data + subset of BW data with new metrices Q score, interruption score
 
-fit.xgbTree_manually_selected <- readRDS("/Users/enk15/Downloads/scripts_previous/fit.xgbTree_PB_manually_selected.rda")
+fit.xgbTree_manually_selected <- readRDS("fit.xgbTree_PB_manually_selected.rda")
 predictions_xgbTree_manually_selected <- predict(fit.xgbTree_manually_selected, merged_data_red, type="prob")
 merged_data_red_ID <- merged_data_red %>% select (Path)
 predictions_xgbTree_manually_selected_scored <- cbind(merged_data_red_ID,predictions_xgbTree_manually_selected)
