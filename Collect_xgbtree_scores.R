@@ -8,8 +8,8 @@ library(dplyr)
 library("tidyr")
 
 #Upload calls
-#Calls <- read.delim("/Users/enk15/Downloads/scripts_previous/HG00514.1_json_files.variants_reduced.tsv",header=TRUE)
-#metrices <- read.table("/Users/enk15/Downloads/scripts_previous/HG00514_metrics.csv",header=TRUE)
+#Calls <- read.delim("HG00514.1_json_files.variants_reduced.tsv",header=TRUE)
+#metrices <- read.table("HG00514_metrics.csv",header=TRUE)
 #name <- "HG00514"
 
 args = commandArgs(TRUE)
@@ -91,6 +91,5 @@ predictions_v1 <- merge(predictions_xgbTree_manually_selected_scored,merged_data
 
 predictions_v2<-  predictions_v1 %>% select (Path,xgbTree_True)
 
-setwd("/Users/enk15/Downloads/scripts_previous")
 write.table(predictions_v2, file = paste0(name,"_xgbtree_scores.tsv"), sep = "\t",
             row.names = FALSE,col.names = TRUE,quote=FALSE)
