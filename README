@@ -17,7 +17,7 @@ The scripts:
       * where the repeat region in the bottom haplotype starts
 
 
-(2) count_nucleotides_from_reads_Total_v3.sh and ount_nucleotides_from_reads_ORANGE_v3.sh
+(2) count_nucleotides_from_reads_Total_v3.sh and count_nucleotides_from_reads_ORANGE_v3.sh
 The scripts get the total counts of nucleotide interruptions within the reads aligned to a reference sequence in the image.
 The input files are the image file {VariantId}.svg and {VariantId}_output2 (the file generated from previous step)
 usage:
